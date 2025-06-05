@@ -1,0 +1,502 @@
+index,description,uml_code
+0,"# Technical Details
+- **Radar and Camera Sensors**: The ACC system employs a combination of radar and camera sensors to detect and track the distance, speed, and trajectory of the preceding vehicle. The radar sensor operates at a frequency of 77 GHz and has a range of up to 200 meters, while the camera sensor is a high-resolution, monocular camera with a 30-degree field of view.
+- **Electronic Control Unit (ECU)**: The ECU is the brain of the ACC system, responsible for processing data from the sensors, calculating the vehicle's speed and distance, and sending commands to the vehicle's powertrain and braking systems. The ECU is a 32-bit microcontroller with a clock speed of 200 MHz and 2 MB of flash memory.
+- **GPS and INERTIAL Measurement Unit (IMU)**: The ACC system uses GPS and IMU data to determine the vehicle's speed, acceleration, and yaw rate. This data is used to improve the system's accuracy and stability.
+- **Powertrain and Braking System Interface**: The ACC system interfaces with the vehicle's powertrain and braking systems through a dedicated CAN bus. The system can adjust engine torque, transmission gear shifts, and brake pressure to maintain a safe distance from the preceding vehicle.
+- **Software Architecture**: The ACC system's software architecture is based on a modular, layered design, with separate modules for sensor processing, tracking, and control. The system uses a model-based design approach, with algorithms developed using MATLAB and Simulink.
+
+# Operational Steps
+- **System Initialization**: The ACC system is initialized when the vehicle is started, and the driver selects the ACC mode.
+- **Sensor Data Collection**: The radar and camera sensors collect data on the distance, speed, and of the preceding vehicle.
+- **Target Vehicle Detection**: The system detects and tracks the target vehicle, using algorithms to filter out false targets and ensure accurate tracking.
+- **Distance and Speed Calculation**: The system calculates the distance and speed of the target vehicle, using data from the radar and camera sensors, as well as GPS and IMU data.
+- **Control Algorithm**: The system's control algorithm adjusts the vehicle's speed and distance to maintain a safe gap from the target vehicle, taking into account factors such as road conditions, weather, and traffic density.
+
+# Interactions with Components and Systems
+- **Braking System**: The ACC system interfaces with the braking system to adjust brake pressure and slow the vehicle down.
+- **Suspension System**: The ACC system interfaces with the suspension system to adjust damping rates and improve vehicle stability.
+- **Steering System**: The ACC system interfaces with the steering system to provide gentle steering corrections to maintain lane centering.
+- **Infotainment System**: The ACC system interfaces with the infotainment system to provide visual and auditory feedback to the driver.
+- **Powertrain System**: The ACC system interfaces with the powertrain system to adjust engine torque and transmission gear shifts.
+
+# Necessary Conditions
+- **Traffic Conditions**: The ACC system requires a moderate to low traffic density to operate effectively.
+- **Driver Attention**: The ACC system requires the driver to be attentive and alert, with their hands on the wheel and eyes on the road.
+- **Vehicle Speed**: The ACC system requires the vehicle to be traveling at a speed of at least 30 km/h to operate.
+- **Road Conditions**: The ACC system requires a clear, dry road surface to operate effectively.
+- **Weather Conditions**: The ACC system requires good weather conditions, with minimal rain, snow, or fog.
+
+# User Interface and Controls
+- **ACC Button**: The ACC system is activated and deactivated using a dedicated button on the steering wheel.
+- **Distance Setting**: The driver sets the desired distance from the target vehicle using a button on the steering wheel.
+- **Set Speed Button**: The driver sets the desired speed using a button on the steering wheel.
+- **Visual Feedback**: The ACC system provides visual feedback to the driver through a display on the instrument cluster.
+- **Auditory Feedback**: The ACC system provides auditory feedback to the driver through a warning tone or voice prompt.
+
+# Fault Detection and Management
+- **Sensor Fault Detection**: The ACC system detects and diagnoses sensor faults, such as radar or camera sensor failures.
+- **ECU Fault Detection**: The ACC system detects and diagnoses ECU faults, such as software or hardware failures.
+- **Powertrain Fault Detection**: The ACC system detects and diagnoses powertrain faults, such as engine or transmission failures.
+- **Braking System Fault Detection**: The ACC system detects and diagnoses braking system faults, such as brake pad wear or ABS malfunctions.
+- **Redundancy and Backup**: The ACC system has redundant systems and backup strategies in place to ensure continued safe operation in the event of a fault.
+- **Speed Error**: The ACC system's speed error metric measures the difference between the vehicle's speed and the target speed.
+- **System Availability**: The ACC system's system availability metric measures the percentage of time the system is available and operational.
+- **Time-to-Collision (TTC)**: The ACC system's TTC metric measures the time it takes for the vehicle to collide with the target vehicle.
+- **Distance-to-Collision (DTC)**: The ACC system's DTC metric measures the distance between the vehicle and the target vehicle.
+- **Distance Error**: The ACC system's distance error metric measures the difference between the vehicle's distance and the target distance.
+- **UNECE Regulations**: The ACC system complies with UNECE regulations for advanced driver assistance systems.
+- **FMVSS Regulations**: The ACC system complies with FMVSS regulations for advanced driver assistance systems.
+- **ISO 26262**: The ACC system complies with ISO 26262 functional safety standards.
+- **Cybersecurity Standards**: The ACC system complies with cybersecurity standards for automotive systems.
+- **Type Approval**: The ACC system has received type approval from regulatory authorities in major markets.
+- **Lane Centering**: The ACC system integrates with lane centering systems to provide a more comprehensive driver assistance package.
+- **Highway Pilot**: The system integrates with highway pilot systems to provide a more comprehensive driver assistance package.
+- **V2X Communication**: The ACC system integrates with V2X communication systems to provide enhanced safety and convenience features.
+- **Automatic Emergency Braking**: The ACC system integrates with automatic emergency braking systems to provide enhanced safety features.
+- **Traffic Jam Assist**: The ACC system integrates with traffic jam assist systems to provide a more comprehensive driver assistance package.","plantuml
+@startuml
+participant ""Driver"" as Driver
+participant ""ACC System"" as ACCSystem
+participant ""Radar Sensor"" as RadarSensor
+participant ""Camera Sensor"" as CameraSensor
+participant ""GPS"" as GPS
+participant ""IMU"" as IMU
+participant ""Powertrain System"" as PowertrainSystem
+participant ""Braking System"" as BrakingSystem
+participant ""Suspension System"" as SuspensionSystem
+participant ""Steering System"" as SteeringSystem
+participant ""Infotainment System"" as InfotainmentSystem
+
+Driver -> ACCSystem: Activates ACC mode
+activate ACCSystem
+ACCSystem -> RadarSensor: Request data
+activate RadarSensor
+RadarSensor --> ACCSystem: Send data
+deactivate RadarSensor
+ACCSystem -> CameraSensor: Request data
+activate CameraSensor
+CameraSensor --> ACCSystem: Send data
+deactivate CameraSensor
+ACCSystem -> GPS: Request data
+activate GPS
+GPS --> ACCSystem: Send data
+deactivate GPS
+ACCSystem -> IMU: Request data
+activate IMU
+IMU --> ACCSystem: Send data
+deactivate IMU
+
+ACCSystem -> ACCSystem: Process sensor data to detect and track target vehicle
+ACCSystem -> ACCSystem: Calculate distance and speed of target vehicle
+ACCSystem -> ACCSystem: Adjust vehicle's speed and distance to maintain safe gap
+
+ACCSystem -> BrakingSystem: Send commands
+activate BrakingSystem
+BrakingSystem --> ACCSystem: Adjust brake pressure
+deactivate BrakingSystem
+
+ACCSystem -> PowertrainSystem: Send commands
+activate PowertrainSystem
+PowertrainSystem --> ACCSystem: Adjust engine torque and transmission gear shifts
+deactivate PowertrainSystem
+
+ACCSystem -> SuspensionSystem: Send commands
+activate SuspensionSystem
+SuspensionSystem --> ACCSystem: Adjust damping rates
+deactivate SuspensionSystem
+
+ACCSystem -> SteeringSystem: Send commands
+activate SteeringSystem
+SteeringSystem --> ACCSystem: Provide gentle steering corrections
+deactivate SteeringSystem
+
+ACCSystem -> InfotainmentSystem: Send feedback
+activate InfotainmentSystem
+InfotainmentSystem --> Driver: Provide visual and auditory feedback
+deactivate InfotainmentSystem
+
+ACCSystem -> ACCSystem: Detect and diagnose faults in RadarSensor, CameraSensor, ECU, PowertrainSystem, and BrakingSystem
+ACCSystem -> ACCSystem: Implement redundancy and backup strategies
+
+deactivate ACCSystem
+@enduml"
+1,"# Technical Details
+- **Electronic Control Unit (ECU)**: The ECU is the brain of the ACC system, responsible for processing data from the sensors, calculating the vehicle's speed and distance, and sending commands to the vehicle's powertrain and braking systems. The ECU is a 32-bit microcontroller with a clock speed of 200 MHz and 2 MB of flash memory.
+- **Powertrain and Braking System Interface**: The ACC system interfaces with the vehicle's powertrain and braking systems through a dedicated CAN bus. The system can adjust engine torque, transmission gear shifts, and brake pressure to maintain a safe distance from the preceding vehicle.
+- **GPS and INERTIAL Measurement Unit (IMU)**: The ACC system uses GPS and IMU data to determine the vehicle's speed, acceleration, and yaw rate. This data is used to improve the system's accuracy and stability.
+- **Software Architecture**: The ACC system's software architecture is based on a modular, layered design, with separate modules for sensor processing, tracking, and control. The system uses a model-based design approach, with algorithms developed using MATLAB and Simulink.
+- **Radar and Camera Sensors: The ACC system employs a combination of radar and camera sensors to detect and track the distance, speed, and trajectory of the preceding vehicle. The radar sensor operates at a frequency of 77 GHz and has a range of up to 200 meters, while the camera sensor is a high-resolution, monocular camera with a 30-degree field of view.
+
+# Operational Steps
+- **Sensor Data Collection**: The radar and camera sensors collect data on the distance, speed, and trajectory of the preceding vehicle.
+- **Target Vehicle Detection**: The system detects and tracks the target vehicle, using algorithms to filter out false targets and ensure accurate tracking.
+- **Distance and Speed Calculation: The system calculates the distance and speed of the target vehicle, using data from the radar and camera sensors, as well as GPS and IMU data.
+- **System Initialization**: The ACC system is initialized when the vehicle is started, and the driver selects the ACC mode.
+- **Control Algorithm**: The system's control algorithm adjusts the vehicle's speed and distance to maintain a safe gap from the target vehicle, taking into account factors such as road conditions, weather, and traffic density.
+
+# Interactions with Components and Systems
+- **Braking System**: The ACC system interfaces with the braking system to adjust brake pressure and slow the vehicle down.
+- **Suspension System**: The ACC system interfaces with the suspension system to adjust damping rates and improve vehicle stability.
+- **Steering System**: The ACC system interfaces with the steering system to provide gentle steering corrections to maintain lane centering.
+- **Infotainment System**: The ACC system interfaces with the infotainment system to provide visual and auditory feedback to the driver.
+- **Powertrain System**: The ACC system interfaces with the powertrain system to adjust engine torque and transmission gear shifts.
+
+# Necessary Conditions
+- **Vehicle Speed**: The ACC system requires the vehicle to be traveling at a speed of at least 30 km/h to operate.
+- **Road Conditions**: The ACC system requires a clear, dry road surface to operate effectively.
+- **Weather Conditions**: The ACC system requires good weather conditions, with minimal rain, snow, or fog.
+- **Traffic Conditions**: The ACC system requires a moderate to low traffic density to operate effectively.
+- **Driver Attention**: The ACC system requires the driver to be attentive and alert, with their hands on the wheel and eyes on the road.
+
+# User Interface and Controls
+- **ACC Button**: The ACC system is activated and deactivated using a dedicated button on the steering wheel.
+- **Set Speed Button**: The driver sets the desired speed using a button on the steering wheel.
+- **Visual Feedback**: The ACC system provides visual feedback to the driver through a display on the instrument cluster.
+- **Auditory Feedback**: The ACC system provides auditory feedback to the driver through a warning tone or voice prompt.
+- **Distance Setting**: The driver sets the desired distance from the target vehicle using a button on the steering wheel.
+
+# Fault Detection and Management
+- **Sensor Fault Detection**: The ACC system detects and diagnoses sensor faults, such as radar or camera sensor failures.
+- **ECU Fault Detection**: The ACC system detects and diagnoses ECU faults, such as software or hardware failures.
+- **Braking System Fault Detection**: The ACC system detects and diagnoses braking system faults, such as brake pad wear or ABS malfunctions.
+- **Powertrain Fault Detection**: The ACC system detects and diagnoses powertrain faults, such as engine or transmission failures.
+- **Redundancy and Backup**: The ACC system has redundant systems and backup strategies in place to ensure continued safe operation in the event of a fault.
+- **Time-to-Collision (TTC)**: The ACC system's TTC metric measures the time it takes for the vehicle to collide with the target vehicle.
+- **Distance-to-Collision (DTC)**: The ACC system's DTC metric measures the distance between the vehicle and the target vehicle.
+- **Speed Error**: The ACC system's speed error metric measures the difference between the vehicle's speed and the target speed.
+- **Distance Error**: The ACC system's distance error metric measures the difference between the vehicle's distance and the target distance.
+- **System Availability**: The ACC system's system availability metric measures the percentage of time the system is available and operational.
+- **UNECE Regulations**: The ACC system complies with UNECE regulations for advanced driver assistance systems.
+- **FMVSS Regulations**: The ACC system complies with FMVSS regulations for advanced driver assistance systems.
+- **Cybersecurity Standards**: The ACC system complies with cybersecurity standards for automotive systems.
+- **Type Approval**: The ACC system has received type approval from regulatory authorities in major markets.
+- **ISO 26262**: The ACC system complies with ISO 26262 functional safety standards.
+- **Lane Centering**: The ACC system integrates with lane centering systems to provide a more comprehensive driver assistance package.
+- **Traffic Jam Assist**: The ACC system integrates with traffic jam assist systems to provide a more comprehensive driver assistance package.
+- **Highway Pilot**: The ACC system integrates with highway pilot systems to provide a more comprehensive driver assistance package.
+- **Automatic Emergency Braking**: The ACC system integrates with automatic emergency braking systems to provide enhanced safety features.
+- **V2X Communication**: The ACC system integrates with V2X communication systems to provide enhanced safety and convenience features.","plantuml
+@startuml
+participant ""Driver"" as Driver
+participant ""ACC System"" as ACCSystem
+participant ""ECU"" as ECU
+participant ""Radar Sensor"" as Radar
+participant ""Camera Sensor"" as Camera
+participant ""GPS"" as GPS
+participant ""IMU"" as IMU
+participant ""Powertrain System"" as Powertrain
+participant ""Braking System"" as Braking
+participant ""Suspension System"" as Suspension
+participant ""Steering System"" as Steering
+participant ""Infotainment System"" as Infotainment
+
+Driver -> ACCSystem: Press ACC Button
+activate Driver
+activate ACCSystem
+
+alt Vehicle Speed >= 30 km/h
+    ACCSystem -> ECU: Initialize ACC System
+    ECU -> Radar: Start Data Collection
+    ECU -> Camera: Start Data Collection
+    ECU -> GPS: Start Data Collection
+    ECU -> IMU: Start Data Collection
+
+    loop Continuously
+        Radar -> ECU: Send Radar Data
+        Camera -> ECU: Send Camera Data
+        GPS -> ECU: Send GPS Data
+        IMU -> ECU: Send IMU Data
+
+        ECU -> ACCSystem: Provide Sensor Data
+        ACCSystem -> ACCSystem: Process Sensor Data
+        ACCSystem -> ACCSystem: Detect Target Vehicle
+        ACCSystem -> ACCSystem: Calculate Distance and Speed
+        ACCSystem -> ACCSystem: Adjust Vehicle Speed and Distance
+
+        alt Distance Error > Threshold
+            ACCSystem -> Braking: Adjust Brake Pressure
+        else Speed Error > Threshold
+            ACCSystem -> Powertrain: Adjust Engine Torque
+            ACCSystem -> Powertrain: Adjust Transmission Gear Shifts
+        end
+
+        alt Lane Centering Required
+            ACCSystem -> Steering: Provide Steering Corrections
+        end
+
+        alt Traffic Jam Assist Required
+            ACCSystem -> ACCSystem: Activate Traffic Jam Assist
+        end
+
+        alt Highway Pilot Required
+            ACCSystem -> ACCSystem: Activate Highway Pilot
+        end
+
+        alt Automatic Emergency Braking Required
+            ACCSystem -> Braking: Apply Emergency Braking
+        end
+
+        alt V2X Communication Required
+            ACCSystem -> ACCSystem: Communicate with V2X Systems
+        end
+
+        ACCSystem -> Infotainment: Provide Visual Feedback
+        ACCSystem -> Infotainment: Provide Auditory Feedback
+    end
+else Vehicle Speed < 30 km/h
+    ACCSystem -> Infotainment: Display Warning Message
+end
+
+Driver -> ACCSystem: Press Set Speed Button
+Driver -> ACCSystem: Set Desired Speed
+Driver -> ACCSystem: Set Desired Distance
+
+Driver -> ACCSystem: Press ACC Button (Deactivate)
+ACCSystem -> ECU: Deinitialize ACC System
+ECU -> Radar: Stop Data Collection
+ECU -> Camera: Stop Data Collection
+ECU -> GPS: Stop Data Collection
+ECU -> IMU: Stop Data Collection
+
+deactivate Driver
+deactivate ACCSystem
+@enduml"
+2,"# Technical Details
+- **Radar and Camera Sensors**: The ACC system employs a combination of radar and camera sensors to detect and track the distance, speed, and trajectory of the preceding vehicle.
+- **Electronic Control Unit (ECU)**: The ECU is the brain of the ACC system, responsible for processing data from the sensors, calculating the vehicle's speed and distance, and sending commands to the vehicle's powertrain and braking systems.
+- **Powertrain and Braking System Interface**: The ACC system interfaces with the vehicle's powertrain and braking systems through a dedicated CAN bus.
+- **GPS and INERTIAL Measurement Unit (IMU)**: The ACC system uses GPS and IMU data to determine the vehicle's speed, acceleration, and yaw rate.
+- **Software Architecture**: The ACC system's software architecture is based on a modular, layered design, with separate modules for sensor processing, tracking, and control.
+
+# Operational Steps
+- **System Initialization**: The ACC system is initialized when the vehicle is started, and the driver selects the ACC mode.
+- **Sensor Data Collection**: The radar and camera sensors collect data on the distance, speed, and trajectory of the preceding vehicle.
+- **Target Vehicle Detection**: The system detects and tracks the target vehicle, using algorithms to filter out false targets and ensure accurate tracking.
+- **Distance and Speed Calculation**: The system calculates the distance and speed of the target vehicle, using data from the radar and camera sensors, as well as GPS and IMU data.
+- **Control Algorithm**: The system's control algorithm adjusts the vehicle's speed and distance to maintain a safe gap from the target vehicle, taking into account factors such as road conditions, weather, and traffic density.
+
+# Interactions with Components and Systems
+- **Powertrain System**: The ACC system interfaces with the powertrain system to adjust engine torque and transmission gear shifts.
+- **Braking System**: The ACC system interfaces with the braking system to adjust brake pressure and slow the vehicle down.
+- **Suspension System**: The ACC system interfaces with the suspension system to adjust damping rates and improve vehicle stability.
+- **Steering System**: The ACC system interfaces with the steering system to provide gentle steering corrections to maintain lane centering.
+- **Infotainment System**: The ACC system interfaces with the infotainment system to provide visual and auditory feedback to the driver.
+
+# Necessary Conditions
+- **Vehicle Speed**: The ACC system requires the vehicle to be traveling at a speed of at least 30 km/h to operate.
+- **Road Conditions**: The ACC system requires a clear, dry road surface to operate effectively.
+- **Traffic Conditions**: The ACC system requires a moderate to low traffic density to operate effectively.
+- **Driver Attention**: The ACC system requires the driver to be attentive and alert, with their hands on the wheel and eyes on the road.
+- **Weather Conditions**: The ACC system requires good weather conditions, with minimal rain, snow, or fog.
+
+# User Interface and Controls
+- **ACC Button**: The ACC system is activated and deactivated using a dedicated button on the steering wheel.
+- **Set Speed Button**: The driver sets the desired speed using a button on the steering wheel.
+- **Distance Setting**: The driver sets the desired distance from the target vehicle using a button on the steering wheel.
+- **Visual Feedback**: The ACC system provides visual feedback to the driver through a display on the instrument cluster.
+- **Auditory Feedback**: The ACC system provides auditory feedback to the driver through a warning tone or voice prompt.
+
+# Fault Detection and Management
+- **ECU Fault Detection**: The ACC system detects and diagnoses ECU faults, such as software or hardware failures.
+- **Powertrain Fault Detection**: The ACC system detects and diagnoses powertrain faults, such as engine or transmission failures.
+- **Braking System Fault Detection**: The ACC system detects and diagnoses braking system faults, such as brake pad wear or ABS malfunctions.
+- **Sensor Fault Detection**: The ACC system detects and diagnoses sensor faults, such as radar or camera sensor failures.
+- **Redundancy and Backup**: The ACC system has redundant systems and backup strategies in place to ensure continued safe operation in the event of a fault.
+- **Time-to-Collision (TTC)**: The ACC system's TTC metric measures the time it takes for the vehicle to collide with the target vehicle.
+- **Distance-to-Collision (DTC)**: The ACC system's DTC metric measures the distance between the vehicle and the target vehicle.
+- **Speed Error**: The ACC system's speed error metric measures the difference between the vehicle's speed and the target speed.
+- **Distance Error**: The ACC system's distance error metric measures the difference between the vehicle's distance and the target distance.
+- **System Availability**: The ACC system's system availability metric measures the percentage of time the system is available and operational.
+- **UNECE Regulations**: The ACC system complies with UNECE regulations for advanced driver assistance systems.
+- **FMVSS Regulations**: The ACC system complies with FMVSS regulations for advanced driver assistance systems.
+- **ISO 26262**: The ACC system complies with ISO 26262 functional safety standards.
+- **Cybersecurity Standards**: The ACC system complies with cybersecurity standards for automotive systems.
+- **Type Approval**: The ACC system has received type approval from regulatory authorities in major markets.
+- **Automatic Emergency Braking**: The ACC system integrates with automatic emergency braking systems to provide enhanced safety features.
+- **Traffic Jam Assist**: The ACC system integrates with traffic jam assist systems to provide a more comprehensive driver assistance package.
+- **Highway Pilot**: The ACC system integrates with highway pilot systems to provide a more comprehensive driver assistance package.
+- **Lane Centering**: The ACC system integrates with lane centering systems to provide a more comprehensive driver assistance package.
+- **V2X Communication**: The ACC system integrates with V2X communication systems to provide enhanced safety and convenience features.","plantuml
+@startuml
+participant ""Driver"" as Driver
+participant ""ACC System"" as ACCSystem
+participant ""Radar Sensor"" as RadarSensor
+participant ""Camera Sensor"" as CameraSensor
+participant ""ECU"" as ECU
+participant ""Powertrain System"" as PowertrainSystem
+participant ""Braking System"" as BrakingSystem
+participant ""GPS"" as GPS
+participant ""IMU"" as IMU
+participant ""Infotainment System"" as InfotainmentSystem
+
+Driver -> ACCSystem: Activate ACC mode
+activate ACCSystem
+ACCSystem -> ECU: Initialize
+activate ECU
+ECU --> ACCSystem: Initialization complete
+deactivate ECU
+
+loop Continuous Data Collection
+    RadarSensor -> ACCSystem: Send data
+    CameraSensor -> ACCSystem: Send data
+    GPS -> ACCSystem: Send data
+    IMU -> ACCSystem: Send data
+    ACCSystem -> ACCSystem: Process sensor data
+    ACCSystem -> ACCSystem: Detect and track target vehicle
+    ACCSystem -> ACCSystem: Calculate distance and speed
+end
+
+alt Vehicle speed >= 30 km/h
+    ACCSystem -> PowertrainSystem: Adjust engine torque and transmission
+    PowertrainSystem -> ACCSystem: Acknowledgment
+    ACCSystem -> BrakingSystem: Adjust brake pressure
+    BrakingSystem -> ACCSystem: Acknowledgment
+else Vehicle speed < 30 km/h
+    ACCSystem -> InfotainmentSystem: Provide visual/auditory feedback
+    InfotainmentSystem -> Driver: Display warning
+end
+
+alt Fault detected
+    ECU -> ACCSystem: Report fault
+    ACCSystem -> InfotainmentSystem: Provide visual/auditory feedback
+    InfotainmentSystem -> Driver: Display warning
+    alt Powertrain fault
+        PowertrainSystem -> ACCSystem: Report fault
+    end
+    alt Braking fault
+        BrakingSystem -> ACCSystem: Report fault
+    end
+    alt Sensor fault
+        RadarSensor -> ACCSystem: Report fault
+        CameraSensor -> ACCSystem: Report fault
+    end
+end
+
+Driver -> ACCSystem: Set desired speed
+Driver -> ACCSystem: Set desired distance
+Driver -> ACCSystem: Deactivate ACC mode
+
+@enduml"
+3,"# Technical Details
+- Radar and Camera Sensors: The ACC system employs a combination of radar and camera sensors to detect and track the distance, speed, and trajectory of the preceding vehicle. The radar sensor operates at a frequency of 77 GHz and has a range of up to 200 meters, while the camera sensor is a high-resolution, monocular camera with a 30-degree field of view.
+- Electronic Control Unit (ECU): The ECU is responsible for processing data from the sensors, calculating the vehicle's speed and distance, and sending commands to the vehicle's powertrain and braking systems. The ECU is a 32-bit microcontroller with a clock speed of 200 MHz and 2 MB of flash memory.
+- Powertrain and Braking System Interface: The ACC system interfaces with the vehicle's powertrain and braking systems through a dedicated CAN bus. The system can adjust engine torque, transmission gear shifts, and brake pressure to maintain a safe distance from the preceding vehicle.
+- GPS and INERTIAL Measurement Unit (IMU): The ACC system uses GPS and IMU data to determine the vehicle's speed, acceleration, and yaw rate. This data is used to improve the system's accuracy and stability.
+- Software Architecture: The ACC system's software architecture is based on a modular, layered design, with separate modules for sensor processing, tracking, and control. The system uses a model-based design approach, with algorithms developed using MATLAB and Simulink.
+
+# Operational Steps
+- System Initialization: The ACC system is initialized when the vehicle is started, and the driver selects the ACC mode.
+- Sensor Data Collection: The radar and camera sensors collect data on the distance, speed, and trajectory of the preceding vehicle.
+- Target Vehicle Detection: The system detects and tracks the target vehicle, using algorithms to filter out false targets and ensure accurate tracking.
+- Control Algorithm: The system's control algorithm adjusts the vehicle's speed and distance to maintain a safe gap from the target vehicle, taking into account factors such as road conditions, weather, and traffic density.
+- Distance and Speed Calculation: The system calculates the distance and speed of the target vehicle, using data from the radar and camera sensors, as well as GPS and IMU data.
+
+# Interactions with Components and Systems
+- Powertrain System: The ACC system interfaces with the powertrain system to adjust engine torque and transmission gear shifts.
+- Braking System: The ACC system interfaces with the braking system to adjust brake pressure and slow the vehicle down.
+- Suspension System: The ACC system interfaces with the suspension system to adjust damping rates and improve vehicle stability.
+- Infotainment System: The ACC system interfaces with the infotainment system to provide visual and auditory feedback to the driver.
+- Steering System: The ACC system interfaces with the steering system to provide gentle steering corrections to maintain lane centering.
+
+# Necessary Conditions
+- Road Conditions: The system requires a clear, dry road surface to operate effectively.
+- Weather Conditions: The ACC system requires good weather conditions, with minimal rain, snow, or fog.
+- Traffic Conditions: The ACC system requires a moderate to low traffic density to operate effectively.
+- Driver Attention: The ACC system requires the driver to be attentive and alert, with their hands on the wheel and eyes on the road.
+- Vehicle Speed: The ACC system requires the vehicle to be traveling at a speed of at least 30 km/h to operate.
+
+# User Interface and Controls
+- ACC Button: The ACC system is activated and deactivated using a dedicated button on the steering wheel.
+- Visual Feedback: The ACC system provides visual feedback to the driver through a display on the instrument cluster.
+- Set Speed Button: The driver sets the desired speed using a button on the steering wheel.
+- Distance Setting: The driver sets the desired distance from the target vehicle using a button on the steering wheel.
+- Auditory Feedback: The system provides auditory feedback to the driver through a warning tone or voice prompt.
+
+# Fault Detection and Management
+- Sensor Fault Detection: The ACC system detects and diagnoses sensor faults, such as radar or camera sensor failures.
+- ECU Fault Detection: The ACC system detects and diagnoses ECU faults, such as software or hardware failures.
+- Powertrain Fault Detection: The ACC system detects and diagnoses powertrain faults, such as engine or transmission failures.
+- Braking System Fault Detection: The ACC system detects and diagnoses braking system faults, such as brake pad wear or ABS malfunctions.
+- Redundancy and Backup: The ACC system has redundant systems and backup strategies in place to ensure continued safe operation in the event of a fault.
+- Distance Error: The ACC system's distance error metric measures the difference between the vehicle's distance and the target distance.
+- Time-to-Collision (TTC): The ACC system's TTC metric measures the time it takes for the vehicle to collide with the target vehicle.
+- Distance-to-Collision (DTC): The ACC system's DTC metric measures the distance between the vehicle and the target vehicle.
+- Speed Error: The ACC system's speed error metric measures the difference between the vehicle's speed and the target speed.
+- System Availability: The ACC system's system availability metric measures the percentage of time the system is available and operational.
+- FMVSS Regulations: The ACC system complies with FMVSS regulations for advanced driver assistance systems.
+- ISO 26262: The ACC system complies with ISO 26262 functional safety standards.
+- Type Approval: The ACC system has received type approval from regulatory authorities in major markets.
+- Cybersecurity Standards: The ACC system complies with cybersecurity standards for automotive systems.
+- UNECE Regulations: The ACC system complies with UNECE regulations for advanced driver assistance systems.
+- Automatic Emergency Braking: The ACC system integrates with automatic emergency braking systems to provide enhanced safety features.
+- Highway Pilot: The ACC system integrates with highway pilot systems to provide a more comprehensive driver assistance package.
+- V2X Communication: The ACC system integrates with V2X communication systems to provide enhanced safety and convenience features.
+- Traffic Jam Assist: The ACC system integrates with traffic jam assist systems to provide a more comprehensive driver assistance package.
+- Lane Centering: The ACC system integrates with lane centering systems to provide a more comprehensive driver assistance package.","plantuml
+@startuml
+participant Driver
+participant ACCSystem
+participant RadarSensor
+participant CameraSensor
+participant ECU
+participant PowertrainSystem
+participant BrakingSystem
+participant SuspensionSystem
+participant InfotainmentSystem
+participant SteeringSystem
+participant GPS
+participant IMU
+
+Driver -> ACCSystem: Activates ACC mode
+activate Driver
+activate ACCSystem
+
+ACCSystem -> RadarSensor: Request data
+activate RadarSensor
+RadarSensor --> ACCSystem: Send data
+deactivate RadarSensor
+
+ACCSystem -> CameraSensor: Request data
+activate CameraSensor
+CameraSensor --> ACCSystem: Send data
+deactivate CameraSensor
+
+ACCSystem -> ECU: Process sensor data
+activate ECU
+ECU --> ACCSystem: Processed data
+deactivate ECU
+
+ACCSystem -> ACCSystem: Detect and track target vehicle
+ACCSystem -> ACCSystem: Calculate distance and speed
+ACCSystem -> PowertrainSystem: Adjust engine torque and transmission gear shifts
+activate PowertrainSystem
+PowertrainSystem --> ACCSystem: Acknowledgment
+deactivate PowertrainSystem
+
+ACCSystem -> BrakingSystem: Adjust brake pressure
+activate BrakingSystem
+BrakingSystem --> ACCSystem: Acknowledgment
+deactivate BrakingSystem
+
+ACCSystem -> SuspensionSystem: Adjust damping rates
+activate SuspensionSystem
+SuspensionSystem --> ACCSystem: Acknowledgment
+deactivate SuspensionSystem
+
+ACCSystem -> InfotainmentSystem: Provide feedback
+activate InfotainmentSystem
+InfotainmentSystem --> Driver: Visual and auditory feedback
+deactivate InfotainmentSystem
+
+ACCSystem -> SteeringSystem: Provide steering corrections
+activate SteeringSystem
+SteeringSystem --> ACCSystem: Acknowledgment
+deactivate SteeringSystem
+
+ACCSystem -> ACCSystem: Detect faults
+ACCSystem -> ACCSystem: Implement redundancy and backup
+
+deactivate Driver
+deactivate ACCSystem
+@enduml"
